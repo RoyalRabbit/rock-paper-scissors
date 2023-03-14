@@ -22,6 +22,7 @@ function getComputerChoice() {
 }
 
 function capitalise (str) {
+    str = str.toLowerCase()
     let length = str.length;
     let firstChar = str.charAt(0);
     let otherChar = str.slice(1,length);
@@ -32,11 +33,10 @@ function capitalise (str) {
 //Function that takes two parameters, determines winner and returns string
 function playerSelection(humanChoice,computerChoice) {
     //convert humanChoice string to all lower case
-    let lowerChoice = humanChoice.toLowerCase();
     let winOrLose = "";
     let resultText = "";
     //Check for tie (eventually check for proper input)
-    if (lowerChoice===computerChoice) {
+    if (humanChoice===computerChoice) {
         winOrLose = "tie";
     }   else { //if not a tie, include switch statement for 3 cases
         switch (humanChoice) {
@@ -88,10 +88,15 @@ function playerSelection(humanChoice,computerChoice) {
 
 
 
-//Test Loop
-for (let i=0; i<10; i++) {
-    let computer = getComputerChoice()
-    console.log("You chose: " + "Rock")
-    console.log("Computer chose: " + capitalise(computer.returnChoice))
-    console.log(playerSelection("rock",computer.returnChoice))
+//Game Loop
+function game() {
+    for (let i=0; i<5; i++) {
+        const computerSelection = getComputerChoice();
+        const input = prompt();
+        console.log("You chose: " + capitalise(input));
+        console.log("Computer chose: " + capitalise(computerSelection.returnChoice));
+        console.log(playerSelection(input.toLowerCase(), computerSelection.returnChoice));
+    }
 }
+
+game()
