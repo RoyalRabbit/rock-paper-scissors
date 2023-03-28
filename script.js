@@ -83,7 +83,7 @@ function playerSelection(humanChoice,computerChoice) {
 
     }
     //return string for winner
-    return resultText
+    return {resultText, winOrLose}
 }
 
 
@@ -98,10 +98,29 @@ function game(input) {
         // console.log("Computer chose: " + capitalise(computerSelection.returnChoice));
         // console.log(playerSelection(input.toLowerCase(), computerSelection.returnChoice));
 
-        //using DOM to display console log responses
-        response.innerText+=("You chose: " + capitalise(input) + "\n");
-        response.innerText+=("Computer chose: " + capitalise(computerSelection.returnChoice) + "\n");
-        response.innerText+=(playerSelection(input.toLowerCase(), computerSelection.returnChoice) + "\n");
+        
+
+        // run the game logic
+        const result = (playerSelection(input.toLowerCase(), computerSelection.returnChoice));
+        
+        // increase result count for win, lose, or tie
+        count[result.winOrLose]++;
+
+        //using DOM to display console log responses and display results of game 
+        response.innerText+=("You chose: " + capitalise(input) + "\n"); //display player selection
+        response.innerText+=("Computer chose: " + capitalise(computerSelection.returnChoice) + "\n"); //display computer selection
+        response.innerText += result.resultText + "\n"; //display win or lose message
+        response.innerText += `Wins: ${count.win} \n` // display win count
+        response.innerText += `Losses: ${count.lose} \n` // display lose count
+        response.innerText += `Ties: ${count.tie} \n` // display tie count
+
+        //display winner result once wins become 5 and reset count
+        if (count.win===5) {
+            response.innerText += 'You Win! Click a button to start again!'
+            Object.keys(count).forEach(key=>count[key]=0);
+        }
+        
+        
     }
 }
 
@@ -111,7 +130,12 @@ const div = document.querySelector('div.button-container');
 // Select the response paragraph
 const response = document.querySelector('.response');
 
-
+// initialize result counter object
+let count = {
+    win: 0,
+    lose: 0,
+    tie: 0,
+};
 
 
 // Add event listener to the whole container
@@ -120,6 +144,7 @@ div.addEventListener("click", (event)=> {
     if (event.target.tagName === "BUTTON") {
         const selection = (event.target.innerText);
         // triggers game with the selected button
+        // resets paragraph text to empty
         response.innerText=" "
         game(selection);
 
