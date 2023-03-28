@@ -119,6 +119,7 @@ function game(input) {
             response.innerText += 'You Win! Click a button to start again!'
             Object.keys(count).forEach(key=>count[key]=0);
         }
+        //display lose result once lose becomes 5 and reset count
         if (count.lose===5) {
             response.innerText += 'You Lose! Click a button to start again!'
             Object.keys(count).forEach(key=>count[key]=0);
