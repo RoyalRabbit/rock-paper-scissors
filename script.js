@@ -90,7 +90,7 @@ function playerSelection(humanChoice,computerChoice) {
 
 //Game Loop
 function game() {
-    for (let i=0; i<5; i++) {
+    for (let i=0; i<1; i++) {
         const computerSelection = getComputerChoice();
         const input = prompt();
         console.log("You chose: " + capitalise(input));
@@ -99,4 +99,4 @@ function game() {
     }
 }
 
-game()
+// game()
