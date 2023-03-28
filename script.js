@@ -89,14 +89,53 @@ function playerSelection(humanChoice,computerChoice) {
 
 
 //Game Loop
-function game() {
-    for (let i=0; i<1; i++) {
-        const computerSelection = getComputerChoice();
-        const input = prompt();
-        console.log("You chose: " + capitalise(input));
-        console.log("Computer chose: " + capitalise(computerSelection.returnChoice));
-        console.log(playerSelection(input.toLowerCase(), computerSelection.returnChoice));
+function game(input) {
+    // for (let i=0; i<1; i++) {
+    {
+    const computerSelection = getComputerChoice();
+        // const input = prompt();
+        // console.log("You chose: " + capitalise(input));
+        // console.log("Computer chose: " + capitalise(computerSelection.returnChoice));
+        // console.log(playerSelection(input.toLowerCase(), computerSelection.returnChoice));
+
+        //using DOM to display console log responses
+        response.innerText+=("You chose: " + capitalise(input) + "\n");
+        response.innerText+=("Computer chose: " + capitalise(computerSelection.returnChoice) + "\n");
+        response.innerText+=(playerSelection(input.toLowerCase(), computerSelection.returnChoice) + "\n");
     }
 }
+
+// Select the button container
+const div = document.querySelector('div.button-container');
+
+// Select the response paragraph
+const response = document.querySelector('.response');
+
+
+
+
+// Add event listener to the whole container
+div.addEventListener("click", (event)=> {
+    //Only triggers if the clicked item was a button
+    if (event.target.tagName === "BUTTON") {
+        const selection = (event.target.innerText);
+        // triggers game with the selected button
+        response.innerText=" "
+        game(selection);
+
+    }
+})
+
+
+// const buttons = document.querySelector('.button-container').querySelectorAll('button');
+// let clicked = buttons.forEach(item=>{
+//     item.addEventListener('click', ()=>console.log(item))
+// })
+
+
+
+
+
+
 
 // game()
