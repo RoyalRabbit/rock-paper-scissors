@@ -119,11 +119,15 @@ function game(input) {
             response.innerText += 'You Win! Click a button to start again!'
             Object.keys(count).forEach(key=>count[key]=0);
         }
-        
+        if (count.lose===5) {
+            response.innerText += 'You Lose! Click a button to start again!'
+            Object.keys(count).forEach(key=>count[key]=0);
+        }
         
     }
 }
 
+//Initializing variables
 // Select the button container
 const div = document.querySelector('div.button-container');
 
@@ -151,16 +155,10 @@ div.addEventListener("click", (event)=> {
     }
 })
 
-
+// Place event listener on each individual button
 // const buttons = document.querySelector('.button-container').querySelectorAll('button');
 // let clicked = buttons.forEach(item=>{
 //     item.addEventListener('click', ()=>console.log(item))
 // })
 
 
-
-
-
-
-
-// game()
